@@ -30,5 +30,4 @@ build/
 ### VS Code ###
 .vscode/
 
-# Add
-/.DS_Store
+.DS_Store
