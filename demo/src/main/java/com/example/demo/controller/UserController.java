@@ -3,6 +3,7 @@ package com.example.demo.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.beans.factory.annotation.Autowired;
 import com.example.demo.data.repository.UserRepository;
 import java.util.List;
@@ -11,6 +12,7 @@ import org.springframework.ui.Model;
 import com.example.demo.form.UserForm;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.PathVariable;
 
 
 @Controller
@@ -19,6 +21,18 @@ public class UserController {
   // userRepositoryを使えるようにする
   @Autowired
   private UserRepository userRepository;
+
+  // httpメソッドで処理を実行したい時は、@xxxMapping("/")でリクエストマッピングを設定する
+  // /{xx} => xxはパスパラメータと呼ばれる => 可変する値が入る
+  @DeleteMapping("/users/{id}")
+  // パスパラメータで取得した値をLong型で受け取る
+  public String deleteUser(@PathVariable Long id){
+
+    // 引数に指定したidを元にデータベースからデータを削除する
+    // userRepositoryのdeleteById()メソッドで削除できる
+    userRepository.deleteById(id);
+    return "redirect:/users";
+  }
 
   @GetMapping("/newuser")
   public String getNewUser(Model model){

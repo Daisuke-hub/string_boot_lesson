@@ -18,6 +18,11 @@
       <td th:text="${user.id}"></td>
       <td th:text="${user.name}"></td>
       <td th:text="${user.email}"></td>
+      <td>
+        <form th:action="@{'/users/' + ${user.id}}" th:method="delete">
+          <input type="submit" value="削除">
+        </form>
+      </td>
     </tr>
   </table>
 
