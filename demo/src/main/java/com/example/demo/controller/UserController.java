@@ -9,6 +9,8 @@ import java.util.List;
 import com.example.demo.data.entity.User;
 import org.springframework.ui.Model;
 import com.example.demo.form.UserForm;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.validation.BindingResult;
 
 
 @Controller
@@ -29,7 +31,12 @@ public class UserController {
   // ユーザの新規登録をする
   @PostMapping("/newuser")
   // HTMLのimputタグで入力した値をUserFormとして受け取る
-  public String registerUser(UserForm userForm){
+  // BindingResultで@Validatedのエラーインスタンスを受け取れるっぽい
+  public String registerUser(@Validated UserForm userForm, BindingResult bindingResult){
+
+    if(bindingResult.hasErrors()){
+      return "newuser";
+    }
 
     // 受け取った値をデータベースに保存するためEntiryにセットする
     // lombokの@Dataはsetter/getterメソッドで呼び出せるっぽい

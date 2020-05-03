@@ -14,15 +14,21 @@
     <tr>
       <th>名前</th>
       <td>
-        <!-- UserForm.javaのフィールドと紐付ける -->
-        <!-- thはthymeleaf独自の属性 -->
+        <!-- thymeleafのth:タグを使って、UserForm.javaのフィールドと紐付ける -->
         <input type="text" th:field="*{name}">
+
+        <!-- バリデーションによるエラー表示 -->
+        <!-- #fielsの中居にバリデーションのエラー情報が入っている -->
+        <!-- hasErrors('フィールド名') => 指定したフィールドにエラーがある場合はtrueを返す -->
+        <!-- th:errors="*{yyy}" => yyy フィールドのエラーを指定したhtmlタグ内に展開する -->
+        <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span>
       </td>
     </tr>
     <tr>
       <th>Email</th>
       <td>
         <input type="text" th:field ="*{email}">
+        <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>
       </td>
     </tr>
   </table>
