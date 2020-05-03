@@ -1,0 +1,25 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>ユーザー一覧</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+</head>
+<body>
+
+  <table>
+    <tr>
+      <th>ID</th>
+      <th>名前</th>
+      <th>Email</th>
+    </tr>
+    <!-- controllerから渡されているusersデータをth:each構文で表示する -->
+    <!-- th:each "リストの要素名(bookersの時のbookと同じ認識)" : ${リストの変数名} -->
+    <tr th:each="user : ${users}">
+      <td th:text="${user.id}"></td>
+      <td th:text="${user.name}"></td>
+      <td th:text="${user.email}"></td>
+    </tr>
+  </table>
+  
+</body>
+</html>
